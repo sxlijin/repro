@@ -1,0 +1,45 @@
+name: Reproduce LFS checkout issues
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 16.x
+      - uses: actions/checkout@v3
+      - run: npm ci
+      - run: npm run build
+      - run: npm run format-check
+      - run: npm run lint
+      - run: npm test
+      - name: Verify no unstaged changes
+        run: __test__/verify-no-unstaged-changes.sh
+
+  test:
+    strategy:
+      matrix:
+        runs-on: [ubuntu-latest]
+        attempt1: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+        attempt2: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+    runs-on: ${{ matrix.runs-on }}
+    name: "Attempt ${{ matrix.attempt1 }}-${{ matrix.attempt2 }}"
+
+    steps:
+      - name: Checkout actions/checkout
+        uses: actions/checkout@v3
+        with:
+          repository: actions/checkout
+
+      - name: Checkout LFS
+        uses: ./
+        with:
+          repository: actions/checkout # hardcoded, otherwise doesn't work from a fork
+          ref: test-data/v2/lfs
+          path: lfs
+          lfs: true
+
+      - name: Verify LFS
+        shell: bash
+        run: __test__/verify-lfs.sh
