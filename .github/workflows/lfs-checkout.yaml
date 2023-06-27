@@ -1,20 +1,9 @@
 name: Reproduce LFS checkout issues
 
+on:
+  workflow_dispatch: {}
+
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 16.x
-      - uses: actions/checkout@v3
-      - run: npm ci
-      - run: npm run build
-      - run: npm run format-check
-      - run: npm run lint
-      - run: npm test
-      - name: Verify no unstaged changes
-        run: __test__/verify-no-unstaged-changes.sh
 
   test:
     strategy:
