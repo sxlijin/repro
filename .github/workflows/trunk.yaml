@@ -9,6 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     name: Trunk Check Runner
 
+    permissions:
+      checks: write
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -16,4 +19,3 @@ jobs:
       - uses: trunk-io/trunk-action@v1.0.7
         with:
           debug: true
-          arguments: --github-repository sxlijin/repro
