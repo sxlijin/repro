@@ -16,3 +16,4 @@ jobs:
       - uses: trunk-io/trunk-action@v1
         with:
           debug: true
+          arguments: --github-repository sxlijin/repro
