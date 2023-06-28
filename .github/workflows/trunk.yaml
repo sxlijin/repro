@@ -1,0 +1,18 @@
+name: Trunk
+
+on:
+  pull_request: {}
+
+jobs:
+
+  check:
+    runs-on: ubuntu-latest
+    name: Trunk Check Runner
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - uses: trunk-io/trunk-action@v1
+        with:
+          debug: true
