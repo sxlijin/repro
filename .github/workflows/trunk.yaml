@@ -19,3 +19,4 @@ jobs:
       - uses: trunk-io/trunk-action@sxlijin-patch-1
         with:
           debug: true
+          arguments: --induced-failure
