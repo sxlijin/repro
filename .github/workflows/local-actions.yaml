@@ -14,4 +14,4 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - uses: trunk-io/trunk-action@main
+      - uses: trunk-io/trunk-action@v1.1.2
