@@ -16,4 +16,4 @@ jobs:
         with:
           path: foo
 
-      - uses: trunk-io/trunk-action@v1.1.2
+      - uses: trunk-io/trunk-action@main
