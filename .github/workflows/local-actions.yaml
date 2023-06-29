@@ -16,8 +16,4 @@ jobs:
         with:
           path: foo
 
-      - name: symlink
-        shell: bash
-        run: ln -s foo foo-link
-
-      - uses: ./foo-link/node-action
+      - uses: trunk-io/trunk-action@v1.1.2
