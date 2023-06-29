@@ -1,0 +1,12 @@
+name: node-action
+description: sxlijin/repro node-action/action.yaml
+
+inputs:
+  foo1:
+    description: foo1
+    required: false
+    default: ""
+
+runs:
+  using: node16
+  main: ./main.js

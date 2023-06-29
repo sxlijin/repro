@@ -1,0 +1,22 @@
+name: Run actions locally
+
+on:
+  pull_request: {}
+
+jobs:
+
+  check:
+    runs-on: ubuntu-latest
+    name: Trunk Check Runner
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          path: foo
+
+      - name: symlink
+        shell: bash
+        run: ln -s foo foo-link
+
+      - uses: ./foo-link/node-action
