@@ -8,6 +8,7 @@ jobs:
   check:
     runs-on: ubuntu-latest
     name: Trunk Check Runner
+    container: catthehacker/ubuntu:runner-20.04
 
     steps:
       - name: Checkout
