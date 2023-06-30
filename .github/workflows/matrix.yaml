@@ -10,17 +10,17 @@ jobs:
       matrix:
         include:
           - name: foo
-            if-string: alpha
+            if-string: true
           
           - name: bar
-            if-string: beta
+            if-string: false
 
     name: ${{ matrix.name }}
     runs-on: ubuntu-latest
 
     steps:
       - shell: bash
-        if: ${{ matrix.if-string }} == 'alpha'
+        if: matrix.if-string
         run: echo ${{ matrix.if-string }}
   
   job1:
@@ -37,5 +37,5 @@ jobs:
 
     steps:
       - shell: bash
-        if: false
+        if: true
         run: echo job2
