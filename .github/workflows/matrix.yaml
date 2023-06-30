@@ -22,3 +22,20 @@ jobs:
       - shell: bash
         if: ${{ matrix.if-string }} == 'alpha'
         run: echo ${{ matrix.if-string }}
+  
+  job1:
+    runs-on: ubuntu-latest
+
+    steps:
+      - shell: bash
+        if: false
+        run: echo job1
+
+  
+  job2:
+    runs-on: ubuntu-latest
+
+    steps:
+      - shell: bash
+        if: false
+        run: echo job2
