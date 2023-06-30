@@ -37,7 +37,7 @@ jobs:
 
     steps:
       - shell: bash
-        if: matrix.if-string == 'true'
+        if: needs.changes.outputs.${{ matrix.if-string }} == 'true'
         run: echo ${{ matrix.if-string }}
   
   job1:
