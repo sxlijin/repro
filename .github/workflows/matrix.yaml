@@ -38,7 +38,7 @@ jobs:
     steps:
       - shell: bash
         if: needs.changes.outputs[matrix.name] == 'true'
-        run: echo ${{ matrix.if-string }}
+        run: echo ${{ needs.changes.outputs[matrix.name] }}
   
   job1:
     runs-on: ubuntu-latest
