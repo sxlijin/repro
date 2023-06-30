@@ -21,4 +21,4 @@ jobs:
     steps:
       - shell: bash
         if: ${{ matrix.if-string }} == 'alpha'
-        run: echo ${{ matrix.name }}
+        run: echo ${{ matrix.if-string }}
