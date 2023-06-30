@@ -1,0 +1,24 @@
+name: matrix if
+on:
+  push:
+    branches: [main]
+  
+jobs:
+  matrix_job:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: foo
+            if-string: alpha
+          
+          - name: bar
+            if-string: beta
+
+    name: ${{ matrix.name }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - shell: bash
+        if: ${{ matrix.if-string }} == 'alpha'
+        run: echo ${{ matrix.name }}
