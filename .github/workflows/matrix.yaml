@@ -4,19 +4,36 @@ on:
     branches: [main]
   
 jobs:
+  changes:
+    runs-on: ubuntu-latest
+
+    outputs:
+      o1: true
+      o2: 'true'
+      o3: false
+      o4: 'false'
+
+    steps:
+      - shell: bash
+        run: echo bash
+
   matrix_job:
     strategy:
       fail-fast: false
       matrix:
         include:
-          - name: foo
-            if-string: true
-          
-          - name: bar
-            if-string: false
+          - name: o1
+            if-string: ${{ needs.changes.outputs.o1 }} == true
+          - name: o2
+            if-string: ${{ needs.changes.outputs.o2 }} == true
+          - name: o3
+            if-string: ${{ needs.changes.outputs.o3 }} == true
+          - name: o4
+            if-string: ${{ needs.changes.outputs.o4 }} == true
 
     name: ${{ matrix.name }}
     runs-on: ubuntu-latest
+    needs: changes
 
     steps:
       - shell: bash
