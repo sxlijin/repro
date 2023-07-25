@@ -46,7 +46,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        include: ${{ inputs.matrix }}
+        include: ${{ fromJSON(inputs.matrix) }}
 
     name: ${{ matrix.job-name }}
     runs-on: ${{ matrix.runs-on }}
