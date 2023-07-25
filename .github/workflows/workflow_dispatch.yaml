@@ -7,13 +7,14 @@ on:
         description: run-name
         required: false
       job-name:
-        description: run-name
+        description: job-name
         required: false
       runs-on:
-        description: run-name
+        description: runs-on
         required: false
+        default: "['ubuntu-latest']"
       concurrency-group:
-        description: run-name
+        description: concurrency-group
         required: false
 
 permissions:
@@ -22,7 +23,7 @@ permissions:
 jobs:
   check:
     name: ${{ inputs.job-name }}
-    runs-on: ${{ inputs.runs-on }}
+    runs-on: ${{ fromJSON(inputs.runs-on) }}
     concurrency:
       group: ${{ inputs.concurrency-group }}
       cancel-in-progress: true
