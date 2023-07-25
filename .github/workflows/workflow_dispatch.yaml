@@ -37,3 +37,23 @@ jobs:
           set -x
           echo ${{ inputs }}
           env | sort
+
+  matrix:
+    strategy:
+      fail-fast: false
+      matrix:
+        include: ${{ inputs.matrix }}
+
+    name: ${{ matrix.job-name }}
+    runs-on: ${{ matrix.runs-on }}
+    concurrency:
+      group: ${{ matrix.concurrency-group }}
+      cancel-in-progress: true
+
+    steps:
+      - shell: bash
+        run: |
+          set -x
+          echo ${{ inputs }}
+          env | sort
+
