@@ -22,7 +22,11 @@ on:
       matrix:
         description: matrix
         required: false
-        default: "[]"
+        default: "[{"job-name":"matrix-job1","runs-on":["ubuntu-latest"],"concurrency-group":"matrix-group1"},{"job-name":"matrix-job2","runs-on":["ubuntu-latest"],"concurrency-group":"matrix-group2"}]"
+      matrix-fail-fast:
+        description: matrix-fail-fast
+        required: false
+        default: false
 
 permissions:
   contents: read
@@ -44,7 +48,7 @@ jobs:
 
   matrix:
     strategy:
-      fail-fast: false
+      fail-fast: ${{ inputs.matrix-fail-fast }}
       matrix:
         include: ${{ fromJSON(inputs.matrix) }}
 
