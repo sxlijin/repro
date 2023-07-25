@@ -22,7 +22,7 @@ on:
       matrix:
         description: matrix
         required: false
-        default: []
+        default: "[]"
 
 permissions:
   contents: read
