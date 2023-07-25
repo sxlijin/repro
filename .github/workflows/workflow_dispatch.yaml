@@ -1,4 +1,4 @@
-name: dynamic payload inputs
+name: dynamic inputs
 run-name: ${{ inputs.run-name }}
 on:
   workflow_dispatch:
