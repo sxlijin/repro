@@ -1,0 +1,34 @@
+name: dynamic payload inputs
+run-name: ${{ inputs.run-name }}
+on:
+  workflow_dispatch:
+    inputs:
+      run-name:
+        description: run-name
+        required: false
+      job-name:
+        description: run-name
+        required: false
+      runs-on:
+        description: run-name
+        required: false
+      concurrency-group:
+        description: run-name
+        required: false
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: ${{ inputs.job-name }}
+    runs-on: ${{ inputs.runs-on }}
+    concurrency:
+      group: ${{ inputs.concurrency-group }}
+      cancel-in-progress: true
+
+    steps:
+      - name: Trunk Check
+        uses: trunk-io/trunk-action@v1
+        with:
+          check-mode: payload
