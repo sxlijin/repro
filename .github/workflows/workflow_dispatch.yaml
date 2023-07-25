@@ -19,6 +19,10 @@ on:
         description: concurrency-group
         required: false
         default: group1
+      matrix:
+        description: matrix
+        required: false
+        default: []
 
 permissions:
   contents: read
