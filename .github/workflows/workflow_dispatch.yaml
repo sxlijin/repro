@@ -6,9 +6,11 @@ on:
       run-name:
         description: run-name
         required: false
+        default: run-name1
       job-name:
         description: job-name
         required: false
+        default: job-name1
       runs-on:
         description: runs-on
         required: false
@@ -16,6 +18,7 @@ on:
       concurrency-group:
         description: concurrency-group
         required: false
+        default: group1
 
 permissions:
   contents: read
