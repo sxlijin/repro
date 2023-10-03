@@ -1,0 +1,12 @@
+name: Scheduled workflow
+on:
+  schedule:
+    - cron: 1 * * * *
+
+permissions: none
+
+jobs:
+  echo:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo foo
