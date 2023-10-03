@@ -9,4 +9,5 @@ jobs:
   echo:
     runs-on: ubuntu-latest
     steps:
-      - run: echo foo
+      - shell: bash
+        run: echo foo
