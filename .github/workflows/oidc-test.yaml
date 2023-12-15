@@ -29,7 +29,6 @@ jobs:
         curl -L https://token.actions.githubusercontent.com/.well-known/jwks.json
 
   oidc-test:
-    if: false
     runs-on: ubuntu-latest
     steps:
     - name: Install OIDC Client from Core Package
