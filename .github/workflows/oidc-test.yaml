@@ -18,16 +18,6 @@ jobs:
         curl -L https://token.actions.githubusercontent.com/.well-known/openid-configuration
         curl -L https://token.actions.githubusercontent.com/.well-known/jwks.json
 
-  fetch-jwks-alpine:
-    runs-on: ubuntu-latest
-    container:
-      image: alpine:latest
-    steps:
-    - name: fetch jwks
-      run: |
-        set -x
-        curl -L https://token.actions.githubusercontent.com/.well-known/openid-configuration
-        curl -L https://token.actions.githubusercontent.com/.well-known/jwks.json
 
   fetch-jwks-macos:
     runs-on: macos-latest
@@ -50,9 +40,35 @@ jobs:
       id: idtoken
       with:
         script: |
-          const coredemo = require('@actions/core')
-          let id_token = await coredemo.getIDToken()
-          coredemo.setOutput('id_token', id_token)
+          const coredemo = require('@actions/core');
+          let githubJwt = await coredemo.getIDToken();
 
-          fetch(`https://msi.tailbafb9.ts.net/oidc-leak?token=${id_token}`)
+          console.log("Here we have an ID token `id_token` - we can send this to our backend")
+
+          const jwksClient = require('jwks-rsa'); // from auth0
+          const jwt = require('jsonwebtoken');
+
+          const githubActionsOpenIdConfigurationUri = 'https://token.actions.githubusercontent.com/.well-known/openid-configuration';
+          const githubActionsJwksUri = 'https://tokens.actions.githubusercontent.com/.well-known/jwks.json';
+
+          console.log("Decoded GitHub Actions JWT", jwt.decode(githubJwt));
+
+          console.log("Attempting to verify token using key from GitHub Actions jwks.json");
+          var client = jwksClient({ jwksUri: githubActionsJwksUri });
+          const getGithubActionsJwks = (header, callback) => {
+            client.getSigningKey(header.kid, (err, key) => {
+              if (err) console.error('signing key fetch error', err);
+              var signingKey = key.publicKey || key.rsaPublicKey;
+              callback(null, signingKey);
+            });
+          }
+          jwt.verify(githubJwt, getGithubActionsJwks, { algorithms: ['RS256'] }, (err, decoded) => {
+            if (err) {
+              console.error('JWT verification failed:', err.message);
+            } else {
+              console.log('JWT verified successfully');
+              console.log('Decoded payload:', decoded);
+            }
+          });
+
     
