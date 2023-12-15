@@ -38,6 +38,9 @@ jobs:
     - name: fetch jwks
       run: curl -L https://token.actions.githubusercontent.com/.well-known/jwks.json
 
+    - name: fetch openidc-configuration again
+      run: curl -L https://token.actions.githubusercontent.com/.well-known/openid-configuration
+
     - name: Install OIDC Client from Core Package
       run: npm install @actions/core@1.6.0 @actions/http-client jwks-rsa jsonwebtoken
       
