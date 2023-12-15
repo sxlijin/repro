@@ -31,6 +31,13 @@ jobs:
   oidc-test:
     runs-on: ubuntu-latest
     steps:
+    
+    - name: fetch openidc-configuration
+      run: curl -L https://token.actions.githubusercontent.com/.well-known/openid-configuration
+
+    - name: fetch jwks
+      run: curl -L https://token.actions.githubusercontent.com/.well-known/jwks.json
+
     - name: Install OIDC Client from Core Package
       run: npm install @actions/core@1.6.0 @actions/http-client jwks-rsa jsonwebtoken
       
