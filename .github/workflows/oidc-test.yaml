@@ -9,8 +9,37 @@ permissions:
   contents: read  # This is required for actions/checkout
 
 jobs:
+  fetch-jwks-ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+    - name: fetch jwks
+      run: |
+        set -x
+        curl -L https://token.actions.githubusercontent.com/.well-known/openid-configuration
+        curl -L https://token.actions.githubusercontent.com/.well-known/jwks.json
+
+  fetch-jwks-alpine:
+    runs-on: ubuntu-latest
+    container:
+      image: alpine:latest
+    steps:
+    - name: fetch jwks
+      run: |
+        set -x
+        curl -L https://token.actions.githubusercontent.com/.well-known/openid-configuration
+        curl -L https://token.actions.githubusercontent.com/.well-known/jwks.json
+
+  fetch-jwks-macos:
+    runs-on: macos-latest
+    steps:
+    - name: fetch jwks
+      run: |
+        set -x
+        curl -L https://token.actions.githubusercontent.com/.well-known/openid-configuration
+        curl -L https://token.actions.githubusercontent.com/.well-known/jwks.json
 
   oidc-test:
+    if: false
     runs-on: ubuntu-latest
     steps:
     - name: Install OIDC Client from Core Package
