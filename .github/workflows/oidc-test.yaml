@@ -33,13 +33,16 @@ jobs:
     env:
       CURLOPT_SSL_CIPHER_LIST: AES256+EECDH:AES256+EDH
     steps:
+      
+    - name: dump curl options
+      run: |
+        env | sort -u
     
     - name: fetch openidc-configuration
       run: curl -L https://token.actions.githubusercontent.com/.well-known/openid-configuration
 
     - name: fetch jwks
       run: |
-        export CURLOPT_SSL_CIPHER_LIST='AES256+EECDH:AES256+EDH'
         curl -L https://token.actions.githubusercontent.com/.well-known/jwks.json
 
     - name: fetch openidc-configuration again
