@@ -37,6 +37,7 @@ jobs:
       
     - name: dump curl options
       run: |
+        apt install libcurl4-openssl-dev
         env | sort -u
         openssl version
     
