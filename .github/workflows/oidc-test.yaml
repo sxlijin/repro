@@ -92,6 +92,6 @@ jobs:
 
     - name: dump curl logs
       if: always()
-      run:
+      run: |
         [ -e /tmp/curl.log] && cat /tmp/curl.log
     
