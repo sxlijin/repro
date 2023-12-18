@@ -37,7 +37,7 @@ jobs:
       
     - name: dump curl options
       run: |
-        apt install libcurl4-openssl-dev
+        sudo apt install libcurl4
         env | sort -u
         openssl version
     
@@ -93,5 +93,5 @@ jobs:
     - name: dump curl logs
       if: always()
       run:
-        cat /tmp/curl.log
+        [ -e /tmp/curl.log] && cat /tmp/curl.log
     
