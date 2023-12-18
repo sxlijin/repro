@@ -32,6 +32,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       CURLOPT_SSL_CIPHER_LIST: AES256+EECDH:AES256+EDH
+      CURLOPT_VERBOSE: 1
     steps:
       
     - name: dump curl options
