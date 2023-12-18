@@ -38,7 +38,9 @@ jobs:
       run: curl -L https://token.actions.githubusercontent.com/.well-known/openid-configuration
 
     - name: fetch jwks
-      run: curl -L https://token.actions.githubusercontent.com/.well-known/jwks.json
+      run: |
+        export CURLOPT_SSL_CIPHER_LIST='AES256+EECDH:AES256+EDH'
+        curl -L https://token.actions.githubusercontent.com/.well-known/jwks.json
 
     - name: fetch openidc-configuration again
       run: curl -L https://token.actions.githubusercontent.com/.well-known/openid-configuration
