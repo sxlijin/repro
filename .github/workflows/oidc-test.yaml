@@ -38,6 +38,7 @@ jobs:
     - name: dump curl options
       run: |
         env | sort -u
+        openssl version
     
     - name: fetch openidc-configuration
       run: curl --trace-ascii /tmp/curl.log --trace-time -L https://token.actions.githubusercontent.com/.well-known/openid-configuration
