@@ -30,6 +30,8 @@ jobs:
 
   oidc-test:
     runs-on: ubuntu-latest
+    env:
+      CURLOPT_SSL_CIPHER_LIST: AES256+EECDH:AES256+EDH
     steps:
     
     - name: fetch openidc-configuration
