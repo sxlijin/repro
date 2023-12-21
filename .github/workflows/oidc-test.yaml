@@ -46,7 +46,7 @@ jobs:
 
     - name: fetch jwks
       run: |
-        curl --trace-ascii /tmp/curl.log --trace-time -L https://token.actions.githubusercontent.com/.well-known/jwks.json
+        curl --trace-ascii /tmp/curl.log --trace-time -L https://token.actions.githubusercontent.com/.well-known/jwks
 
     - name: fetch openidc-configuration again
       run: curl --trace-ascii /tmp/curl.log --trace-time -L https://token.actions.githubusercontent.com/.well-known/openid-configuration
