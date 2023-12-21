@@ -72,10 +72,12 @@ jobs:
 
           console.log("Decoded GitHub Actions JWT", jwt.decode(githubJwt));
 
-          console.log("Attempting to verify token using key from GitHub Actions jwks.json");
+          console.log("Attempting to verify token using key from GitHub Actions jwks");
           var client = jwksClient({ jwksUri: githubActionsJwksUri });
           const getGithubActionsJwks = (header, callback) => {
+            console.log('the header we got', header)
             client.getSigningKey(header.kid, (err, key) => {
+              console.log('the key we got back', key)
               if (err) console.error('signing key fetch error', err);
               var signingKey = key.publicKey || key.rsaPublicKey;
               callback(null, signingKey);
