@@ -98,9 +98,25 @@ jobs:
               console.log('Decoded payload:', decoded);
             }
           });
+ 
+    - name: exchange for special token
+      uses: actions/github-script@v6
+      id: idtoken
+      with:
+        script: |
+          const actions = require('@actions/core');
+          let githubJwt = await actions.getIDToken();
 
-    - name: dump curl logs
-      if: always()
-      run: |
-        [ -e /tmp/curl.log] && cat /tmp/curl.log
-    
+          console.log("Here we have an ID token `id_token` - we can send this to our backend")
+
+          const jwksClient = require('jwks-rsa'); // from auth0
+          const jwt = require('jsonwebtoken');
+
+          const apiToken = await fetch('https://sam-dell.tailnet-6e00.ts.net/getApiToken', {
+            method: 'POST',
+            headers: {
+              'x-github-jwt': githubJwt
+            }
+          });
+
+          console.log(`fetched token: ${apiToken}`);
