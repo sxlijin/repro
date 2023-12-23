@@ -110,11 +110,12 @@ jobs:
           const jwksClient = require('jwks-rsa'); // from auth0
           const jwt = require('jsonwebtoken');
 
-          const apiToken = await fetch('https://sam-dell.tailnet-6e00.ts.net/getApiToken', {
+          const response = await fetch('https://sam-dell.tailnet-6e00.ts.net/getApiToken', {
             method: 'POST',
             headers: {
               'x-github-jwt': githubJwt
             }
           });
+          const apiToken = response.json();
 
-          console.log(`fetched token: ${apiToken}`);
+          console.log(`fetched token`, apiToken);
