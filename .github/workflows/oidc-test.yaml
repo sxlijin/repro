@@ -2,7 +2,7 @@ name: oidc-test
 
 on:
   push:
-    branches: [main]
+    branches: []
     
 permissions:
   id-token: write # This is required for requesting the JWT
