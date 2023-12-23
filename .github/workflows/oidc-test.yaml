@@ -56,7 +56,6 @@ jobs:
       
     - name: Get Id Token
       uses: actions/github-script@v6
-      id: idtoken
       with:
         script: |
           const coredemo = require('@actions/core');
@@ -101,7 +100,6 @@ jobs:
  
     - name: exchange for special token
       uses: actions/github-script@v6
-      id: idtoken
       with:
         script: |
           const actions = require('@actions/core');
