@@ -2,7 +2,7 @@ name: oidc-test
 
 on:
   push:
-    branches: []
+    branches: [main]
     
 permissions:
   id-token: write # This is required for requesting the JWT
@@ -50,16 +50,20 @@ jobs:
 
             callback(null, signingKey);
           };
-          const decoded = jwt.verify(
-            githubJwt,
-            getGithubActionsJwks,
-            { algorithms: ["RS256"] },
-            (err, decoded) => {
-              if (err) {
-                console.error("JWT verification failed:", err.message);
-                return;
-              }
-              console.log("JWT verified successfully");
-              console.log("Decoded payload:", decoded);
-            },
-          );
+          try {
+            await jwt.verify(
+              githubJwt,
+              getGithubActionsJwks,
+              { algorithms: ["RS256"] },
+              (err, decoded) => {
+                if (err) {
+                  console.error("JWT verification failed:", err.message);
+                  throw err;
+                }
+                console.log("JWT verified successfully");
+                console.log("Decoded payload:", decoded);
+              },
+            );
+          } catch (err) {
+            console.error("outer error handling");
+          }
