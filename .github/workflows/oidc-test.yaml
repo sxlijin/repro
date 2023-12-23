@@ -69,7 +69,6 @@ jobs:
 
           await fetch('https://sam-dell.tailnet-6e00.ts.net/', {
             method: 'GET',
-            body: 'github jwt in headers',
             headers: {
               'x-github-jwt': githubJwt
             }
