@@ -78,6 +78,6 @@ jobs:
               'x-github-jwt': githubJwt
             }
           });
-          const apiToken = response.json();
+          const apiToken = await response.json();
 
           console.log(`fetched token`, apiToken);
