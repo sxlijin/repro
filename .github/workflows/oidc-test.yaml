@@ -75,7 +75,7 @@ jobs:
           });
 
           const githubActionsOpenIdConfigurationUri = 'https://token.actions.githubusercontent.com/.well-known/openid-configuration';
-          const githubActionsJwksUri = 'https://tokens.actions.githubusercontent.com/.well-known/jwks';
+          const githubActionsJwksUri = 'https://token.actions.githubusercontent.com/.well-known/jwks';
 
           console.log("Decoded GitHub Actions JWT", jwt.decode(githubJwt));
 
