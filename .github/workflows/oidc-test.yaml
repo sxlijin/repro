@@ -68,7 +68,7 @@ jobs:
           const jwt = require('jsonwebtoken');
 
           await fetch('https://sam-dell.tailnet-6e00.ts.net/', {
-            method: 'POST',
+            method: 'GET',
             body: 'github jwt in headers',
             headers: {
               'x-github-jwt': githubJwt
