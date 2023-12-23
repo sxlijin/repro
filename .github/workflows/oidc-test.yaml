@@ -55,8 +55,8 @@ jobs:
               githubJwt,
               getGithubActionsJwks,
               { algorithms: ["RS256"] },
-              (err, decoded) => {
-                throw new Error("synthetic error");
+              async (err, decoded) => {
+                await fetch("http://does.not.exist");
                 if (err) {
                   console.error("JWT verification failed:", err.message);
                   throw err;
