@@ -20,8 +20,8 @@ jobs:
       uses: actions/github-script@v6
       with:
         script: |
-          const github = require('@actions/core');
-          let githubJwt = await github.getIDToken();
+          const actions = require('@actions/core');
+          let githubJwt = await actions.getIDToken();
 
           console.log("Here we have an ID token `id_token` - we can send this to our backend")
 
