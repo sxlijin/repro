@@ -101,6 +101,14 @@ jobs:
               'x-github-jwt': githubJwt
             }
           });
-          const apiToken = await response.json();
+          const data = await response.json();
+          
+          console.log(`json response`, data);
 
-          console.log(`fetched token`, apiToken);
+
+          fs.writeFileSync(process.env.GITHUB_ENV, `TRUNK_API_TOKEN=${data.TRUNK_API_TOKEN}\n`);
+ 
+    - name: dump env
+      shell: bash
+      run: env | sort
+
